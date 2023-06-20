@@ -258,33 +258,25 @@ class SegmentAnything(Model):
         """
         # Find contours
         contours, _ = cv2.findContours(
-            masks.astype(np.uint8), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE
+            masks.astype(np.uint8), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_TC89_KCOS
         )
-
-        # Refine contours
-        approx_contours = []
-        for contour in contours:
-            # Approximate contour
-            epsilon = 0.001 * cv2.arcLength(contour, True)
-            approx = cv2.approxPolyDP(contour, epsilon, True)
-            approx_contours.append(approx)
-
+                    
         # Remove small contours (area < 20% of average area)
-        if len(approx_contours) > 1:
-            areas = [cv2.contourArea(contour) for contour in approx_contours]
+        if len(contours) > 1:
+            areas = [cv2.contourArea(contour) for contour in contours]
             avg_area = np.mean(areas)
 
-            filtered_approx_contours = [
+            filtered_contours = [
                 contour
-                for contour, area in zip(approx_contours, areas)
+                for contour, area in zip(contours, areas)
                 if area > avg_area * 0.2
             ]
-            approx_contours = filtered_approx_contours
+            contours = filtered_contours
 
         # Contours to shapes
         shapes = []
         if self.output_mode == "polygon":
-            for approx in approx_contours:
+            for approx in contours:
                 # Scale points
                 points = approx.reshape(-1, 2)
                 points[:, 0] = points[:, 0] / resized_ratio[0]
@@ -313,7 +305,7 @@ class SegmentAnything(Model):
             y_min = 100000000
             x_max = 0
             y_max = 0
-            for approx in approx_contours:
+            for approx in contours:
                 # Scale points
                 points = approx.reshape(-1, 2)
                 points[:, 0] = points[:, 0] / resized_ratio[0]
@@ -350,7 +342,7 @@ class SegmentAnything(Model):
         """
         if image is None or not self.marks:
             return AutoLabelingResult([], replace=False)
-
+        
         shapes = []
         try:
             # Use cached image embedding if possible
