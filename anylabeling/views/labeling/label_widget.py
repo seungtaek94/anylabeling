@@ -1092,12 +1092,17 @@ class LabelingWidget(LabelDialog):
         text_previous = self.tr("Previous:")
         text_next = self.tr("Next:")
         text_rectangle = self.tr("Rectangle:")
-        text_polygon = self.tr("Polygon:")
+        #text_polygon = self.tr("Polygon:")
+        text_polygon = self.tr("Manual:")
+        text_edit_mode = self.tr("Edit:")
+        text_edit_label = self.tr("Edit_Label:")
         return (
             f"<b>{text_mode}</b> {self.canvas.get_mode()} - <b>{text_shortcuts}</b>"
             f" {text_previous} <b>A</b>, {text_next} <b>D</b>,"
-            f" {text_rectangle} <b>R</b>,"
-            f" {text_polygon}: <b>P</b>"
+            #f" {text_rectangle} <b>R</b>,"
+            f" {text_polygon} <b>M</b>,"
+            f" {text_edit_mode} <b>E</b>,"
+            f" {text_edit_label} <b>Ctrl+E</b>"
         )
 
     @pyqtSlot()
@@ -2749,3 +2754,4 @@ class LabelingWidget(LabelDialog):
             self.shape_text_edit.textChanged.disconnect()
             self.shape_text_edit.setPlainText("")
             self.shape_text_edit.textChanged.connect(self.shape_text_changed)
+

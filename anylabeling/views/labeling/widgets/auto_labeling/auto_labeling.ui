@@ -116,28 +116,28 @@
      <item>
       <widget class="QPushButton" name="button_remove_point">
        <property name="text">
-        <string>-Point (E)</string>
+        <string>-Point (W)</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="button_add_rect">
        <property name="text">
-        <string>+Rect</string>
+        <string>+Rect(R)</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="button_clear">
        <property name="text">
-        <string>Clear</string>
+        <string>Clear (C)</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="button_finish_object">
        <property name="text">
-        <string>Finish Object (f)</string>
+        <string>Finish Object (F)</string>
        </property>
       </widget>
      </item>

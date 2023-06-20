@@ -58,24 +58,27 @@ class AutoLabelingWidget(QWidget):
 
         # Auto labeling buttons
         self.button_run.setShortcut("I")
-        self.button_run.clicked.connect(self.run_prediction)
+        self.button_run.clicked.connect(self.run_prediction)    
+                
+        self.button_add_point.setShortcut("Q")
         self.button_add_point.clicked.connect(
             lambda: self.set_auto_labeling_mode(
                 AutoLabelingMode.ADD, AutoLabelingMode.POINT
             )
-        )
-        self.button_add_point.setShortcut("Q")
+        )        
+        self.button_remove_point.setShortcut("W")
         self.button_remove_point.clicked.connect(
             lambda: self.set_auto_labeling_mode(
                 AutoLabelingMode.REMOVE, AutoLabelingMode.POINT
             )
         )
-        self.button_remove_point.setShortcut("E")
+        self.button_add_rect.setShortcut("R")
         self.button_add_rect.clicked.connect(
             lambda: self.set_auto_labeling_mode(
                 AutoLabelingMode.ADD, AutoLabelingMode.RECTANGLE
             )
         )
+        self.button_clear.setShortcut("C")
         self.button_clear.clicked.connect(
             self.clear_auto_labeling_action_requested
         )

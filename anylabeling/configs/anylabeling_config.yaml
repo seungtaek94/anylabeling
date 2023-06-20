@@ -92,13 +92,14 @@ shortcuts:
   fit_window: Ctrl+F
   fit_width: Ctrl+Shift+F
 
-  create_polygon: [P, Ctrl+N]
-  create_rectangle: [R, Ctrl+R]
+  create_polygon: [M, Ctrl+N]
+  #create_rectangle: [R, Ctrl+R]
+  create_rectangle: null
   create_circle: null
   create_line: null
   create_point: null
   create_linestrip: null
-  edit_polygon: Ctrl+J
+  edit_polygon: E
   delete_polygon: Delete
   duplicate_polygon: Ctrl+D
   copy_polygon: Ctrl+C
