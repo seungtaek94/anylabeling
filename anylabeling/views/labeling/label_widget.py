@@ -1418,15 +1418,17 @@ class LabelingWidget(LabelDialog):
             )
 
         self._update_shape_color(shape)
-        if shape.group_id is None:
-            color = shape.fill_color.getRgb()[:3]
-            item.setText(
-                '{} <font color="#{:02x}{:02x}{:02x}">●</font>'.format(
-                    html.escape(shape.label), *color
+        text = f"{shape.label}"
+                        
+        if shape.group_id is not None:
+            text += f" ({shape.group_id})"
+                    
+        color = shape.fill_color.getRgb()[:3]
+        item.setText(
+            '{} <font color="#{:02x}{:02x}{:02x}">●</font>'.format(
+                html.escape(text), *color
                 )
             )
-        else:
-            item.setText(f"{shape.label} ({shape.group_id})")
         self.set_dirty()
 
     def file_search_changed(self):
@@ -2703,15 +2705,17 @@ class LabelingWidget(LabelDialog):
                 # Update label list
                 self._update_shape_color(shape)
                 item = self.label_list.find_item_by_shape(shape)
-                if shape.group_id is None:
-                    color = shape.fill_color.getRgb()[:3]
-                    item.setText(
-                        '{} <font color="#{:02x}{:02x}{:02x}">●</font>'.format(
-                            html.escape(shape.label), *color
+                text = f"{shape.label}"
+                
+                if shape.group_id is not None:
+                    text += f" ({shape.group_id})"
+                    
+                color = shape.fill_color.getRgb()[:3]
+                item.setText(
+                    '{} <font color="#{:02x}{:02x}{:02x}">●</font>'.format(
+                        html.escape(text), *color
                         )
                     )
-                else:
-                    item.setText(f"{shape.label} ({shape.group_id})")
 
         # Clean up auto labeling objects
         self.clear_auto_labeling_marks()
