@@ -1524,6 +1524,8 @@ class LabelingWidget(LabelDialog):
         shape.select_fill_color = QtGui.QColor(r, g, b, 155)
 
     def _get_rgb_by_label(self, label):
+        if label=="AUTOLABEL_OBJECT":
+            return (255, 0, 0)
         if self._config["shape_color"] == "auto":
             if not self.unique_label_list.find_items_by_label(label):
                 item = self.unique_label_list.create_item_from_label(label)

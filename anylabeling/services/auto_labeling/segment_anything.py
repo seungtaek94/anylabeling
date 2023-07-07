@@ -109,7 +109,7 @@ class SegmentAnything(Model):
         masks[masks <= 0.0] = 0
         masks = masks.astype(np.uint8)
         contours, _ = cv2.findContours(
-            masks, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE
+            masks, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_TC89_KCOS
         )
                     
         # Remove small contours (area < 20% of average area)
